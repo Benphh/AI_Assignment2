@@ -1,5 +1,5 @@
 library(readr)
-x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_six_1.csv", header = FALSE)
+x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_one_1.csv", header = FALSE)
 x
 # Code for nr_pix #
 num <- 1
@@ -115,4 +115,18 @@ for(row in 1:24) {
   
 }
 left2tile
+
+
+
+# Code for right2tile
+right2tile <- 0
+for(row in 1:24) {
+  for(col in 1:24) {
+    if ((x[row, col] == 0)&(x[row+1, col] == 0)&(x[row, col+1] == 1)&(x[row+1, col+1] == 1)){
+      right2tile<- right2tile + 1
+    }
+  }
+  
+}
+right2tile
 
