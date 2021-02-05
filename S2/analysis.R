@@ -90,3 +90,17 @@ for(row in 1:nrow(x)) {
 }
 height <- (list_of_rows[length(list_of_rows)] - list_of_rows[1])
 height
+
+# Code for width
+list_of_cols <- c()
+width <- 0
+for(col in 1:ncol(x)) {
+  for(row in 1:nrow(x)) {
+    if (x[row, col] == num){
+      list_of_cols <- c(list_of_cols, col)
+    }
+  }
+  
+}
+width <- (list_of_cols[length(list_of_cols)] - list_of_cols[1])
+width
