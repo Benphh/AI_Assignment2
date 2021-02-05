@@ -1,17 +1,17 @@
 library(readr)
-x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_one_1.csv", header = FALSE)
+x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_less_7.csv", header = FALSE)
 x
 # Code for nr_pix #
 num <- 1
-total_black <- 0
+nr_pix <- 0
 for(row in 1:nrow(x)) {
   for(col in 1:ncol(x)) {
     if (x[row, col] == num){
-      total_black <- total_black + 1
+      nr_pix <- nr_pix + 1
     }
   }
 }
-total_black
+nr_pix
 # Code for rows_with_2
 num <- 1
 total_row_black <- 0
@@ -129,4 +129,63 @@ for(row in 1:24) {
   
 }
 right2tile
+
+# Code for verticalness
+verticalness <- (left2tile + right2tile) / nr_pix
+verticalness
+
+# Code for top2tile
+top2tile <- 0
+for(row in 1:24) {
+  for(col in 1:24) {
+    if ((x[row, col] == 1)&(x[row+1, col] == 0)&(x[row, col+1] == 1)&(x[row+1, col+1] == 0)){
+      top2tile<- top2tile + 1
+    }
+  }
+  
+}
+top2tile
+
+# Code for bottom2tile
+bottom2tile <- 0
+for(row in 1:24) {
+  for(col in 1:24) {
+    if ((x[row, col] == 0)&(x[row+1, col] == 1)&(x[row, col+1] == 0)&(x[row+1, col+1] == 1)){
+      bottom2tile<- bottom2tile + 1
+    }
+  }
+  
+}
+bottom2tile
+
+# Code for horizontalness
+horizontalness <- (top2tile + bottom2tile) / nr_pix
+horizontalness
+
+# Code for left_to_right_diagonal
+left_to_right_diagonal <- 0
+for(row in 1:23) {
+  for(col in 1:23) {
+    if (((x[row+2, col] == num)|(x[row+1, col] == num)|(x[row+2, col+1] == num))&(x[row+1, col+1] == num)&(x[row, col+2] == num)){
+      left_to_right_diagonal<- left_to_right_diagonal + 1
+    }
+  }
+  
+}
+left_to_right_diagonal
+
+# Code for right_to_left_diagonal
+right_to_left_diagonal <- 0
+for(row in 1:23) {
+  for(col in 1:23) {
+    if (((x[row+1, col+2] == num)|(x[row+2, col+1] == num)|(x[row+2, col+2] == num))&(x[row+1, col+1] == num)&(x[row, col] == num)){
+      right_to_left_diagonal<- right_to_left_diagonal + 1
+    }
+  }
+  
+}
+right_to_left_diagonal
+
+# Code for diagonalness
+diagonalness <- (left_to_right_diagonal + right_to_left_diagonal) / nr_pix
 
