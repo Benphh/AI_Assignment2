@@ -1,5 +1,5 @@
 library(readr)
-x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_seven_1.csv", header = FALSE)
+x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_equal_1.csv", header = FALSE)
 x
 # Code for nr_pix #
 num <- 1
@@ -77,4 +77,16 @@ for(col in 1:ncol(x)) {
 }
 total_3p_black_pixel_cols
 
+# Code for height
+list_of_rows <- c()
+height <- 0
+for(row in 1:nrow(x)) {
+  for(col in 1:ncol(x)) {
+    if (x[row, col] == num){
+      list_of_rows <- c(list_of_rows, row)
+    }
+  }
 
+}
+height <- (list_of_rows[length(list_of_rows)] - list_of_rows[1])
+height
