@@ -1,5 +1,5 @@
 library(readr)
-x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_approxequal_1.csv", header = FALSE)
+x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_seven_1.csv", header = FALSE)
 x
 # Code for nr_pix #
 num <- 1
@@ -60,5 +60,21 @@ for(row in 1:nrow(x)) {
   total_row_black <- 0
 }
 total_3p_black_pixel_rows
+
+# Code for cols_with_3p
+total_cols_black <- 0
+total_3p_black_pixel_cols <- 0
+for(col in 1:ncol(x)) {
+  for(row in 1:nrow(x)) {
+    if (x[row, col] == num){
+      total_cols_black <- total_cols_black + 1
+    }
+  }
+  if (total_cols_black >=  3){
+    total_3p_black_pixel_cols <- total_3p_black_pixel_cols + 1
+  }
+  total_cols_black <- 0
+}
+total_3p_black_pixel_cols
 
 
