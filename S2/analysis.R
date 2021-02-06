@@ -1,21 +1,35 @@
 library(readr)
-x <- read.csv("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/40266977_less_7.csv", header = FALSE)
-x
+# This makes a csv file that holds all of the file names for us to loop through 
+fileNames <- Sys.glob("Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/Images/section1_images_csv/*.csv")
+
+
+nr_pix <- c()
+
+# This loops through all of the files
+for (file in fileNames){
+  x <- read.csv(file, header = FALSE)
+
+
+
+label <- 'a'
+index <- 1
+
 # Code for nr_pix #
 num <- 1
-nr_pix <- 0
+var_nr_pix <- 0
 for(row in 1:nrow(x)) {
   for(col in 1:ncol(x)) {
     if (x[row, col] == num){
-      nr_pix <- nr_pix + 1
+      var_nr_pix <- var_nr_pix + 1
     }
   }
 }
-nr_pix
+nr_pix <- c(nr_pix, var_nr_pix)
+
 # Code for rows_with_2
 num <- 1
 total_row_black <- 0
-total_2_black_pixel_rows <- 0
+rows_with_2 <- 0
 for(row in 1:nrow(x)) {
   for(col in 1:ncol(x)) {
     if (x[row, col] == num){
@@ -23,11 +37,11 @@ for(row in 1:nrow(x)) {
     }
   }
   if (total_row_black == 2){
-    total_2_black_pixel_rows <- total_2_black_pixel_rows + 1
+    rows_with_2 <- rows_with_2 + 1
   }
   total_row_black <- 0
 }
-total_2_black_pixel_rows
+rows_with_2
 
 # Code for cols_with_2
 total_cols_black <- 0
@@ -188,4 +202,17 @@ right_to_left_diagonal
 
 # Code for diagonalness
 diagonalness <- (left_to_right_diagonal + right_to_left_diagonal) / nr_pix
+
+
+
+}
+print(nr_pix)
+
+# Code for writing to the csv file
+features_labels<- c('label', 'index', 'nr_pix', 'rows_with_2', 'cols_with_2','rows_with_3p','cols_with_3p','height','width','left2tile','right2tile','verticalness','top2tile','bottom2tile','horizontalness','diagonalness')
+a_1_features<-c(index, index, nr_pix, rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2,rows_with_2)
+
+features_df <- cbind(nr_pix, nr_pix)
+write.csv(features_df, "Desktop/College/2.CSC2062 - Intro to Artificial Intelligence/Assignments/Assignment_2/AI_Assignment2/S2/40266977_features.csv",row.names=FALSE)
+
 
